@@ -16,3 +16,9 @@ f.onsubmit=e=>{e.preventDefault();if(!sel){alert('Please pick a date on the cale
 const body=`Request type: ${s}\nDate: ${dateIn.value}\nPreferred time: ${f.time.value}\nRiders/students: ${f.riders.value}\nName: ${f.name.value}\nPhone: ${f.phone.value}\nNotes: ${f.notes.value}\n\n(Sent from the Cheval Stables preview booking form)`;
 document.getElementById('res').hidden=false;document.getElementById('mail').href='mailto:ChevalStablesTN@gmail.com?subject='+encodeURIComponent(s+' request – '+dateIn.value)+'&body='+encodeURIComponent(body)};
 render();upd()})();
+(function(){const els=document.querySelectorAll('.reveal');if(!('IntersectionObserver'in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(e=>e.classList.add('in'));return}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.05});els.forEach(e=>io.observe(e))})();
+(function(){const imgs=[...document.querySelectorAll('.gallery img')],lb=document.getElementById('lb'),im=lb.querySelector('img'),cap=lb.querySelector('p');let i=0;
+function show(n){i=(n+imgs.length)%imgs.length;im.src=imgs[i].src;im.alt=imgs[i].alt;cap.textContent=imgs[i].alt;lb.hidden=false}
+imgs.forEach((g,n)=>g.onclick=()=>show(n));lb.querySelector('.lb-x').onclick=()=>lb.hidden=true;lb.querySelector('.lb-p').onclick=e=>{e.stopPropagation();show(i-1)};lb.querySelector('.lb-n').onclick=e=>{e.stopPropagation();show(i+1)};
+lb.onclick=e=>{if(e.target===lb)lb.hidden=true};document.addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')lb.hidden=true;if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1)})})();
