@@ -22,3 +22,5 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 function show(n){i=(n+imgs.length)%imgs.length;im.src=imgs[i].src;im.alt=imgs[i].alt;cap.textContent=imgs[i].alt;lb.hidden=false}
 imgs.forEach((g,n)=>g.onclick=()=>show(n));lb.querySelector('.lb-x').onclick=()=>lb.hidden=true;lb.querySelector('.lb-p').onclick=e=>{e.stopPropagation();show(i-1)};lb.querySelector('.lb-n').onclick=e=>{e.stopPropagation();show(i+1)};
 lb.onclick=e=>{if(e.target===lb)lb.hidden=true};document.addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')lb.hidden=true;if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1)})})();
+(function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const bands=document.querySelectorAll('.band');if(matchMedia('(min-width:900px) and (hover:hover)').matches)return;
+addEventListener('scroll',()=>bands.forEach(b=>{const r=b.getBoundingClientRect();b.style.backgroundPosition='center '+(50+(r.top/innerHeight)*-12)+'%'}),{passive:true})})();
